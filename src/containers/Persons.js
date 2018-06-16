@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionType from '../store/actions';
- 
+
 import Person from '../components/Person/Person';
 import AddPerson from '../components/AddPerson/AddPerson';
- 
+
 class Persons extends Component {
     render () {
         return (
@@ -16,23 +16,24 @@ class Persons extends Component {
                         name={person.name} 
                         age={person.age} 
                         clicked={() => this.props.deletePerson(person.id)}/>
-                    ))}
+                ))}
             </div>
         );
     }
 }
- 
+
 const mapStateToProps = (state) => {
     return {
         persons: state.persons
     }
 }
- 
+
 const mapDispatchToProps = (dispatch) => {
     return {
-        addPerson: () => dispatch({ type: actionType.ADD_PERSON }),
+        addPerson:    (name, age) => dispatch({ type: actionType.ADD_PERSON, personData: { name, age } }),
         deletePerson: (id) => dispatch({ type: actionType.DELETE_PERSON, personId:id })
     }
 }
- 
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(Persons);
